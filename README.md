@@ -15,6 +15,6 @@ git clone https://github.com/plebnet-dev/plebnet-compose
 
 Install docker for desktop here https://docs.docker.com/engine/install/#desktop
 
-This will allow you to run docker and docker compose commands
+This will allow you to run `docker` and `docker compose` commands
 
 

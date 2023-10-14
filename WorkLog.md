@@ -1,3 +1,4 @@
+* docker build and run, compose
 
 # 2023-10-14 14:54:59.857191: clock-in
 
