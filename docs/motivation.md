@@ -17,6 +17,11 @@ The same container can be developed on a laptop and deployed to cloud AWS/Google
 
 ## modularity
 
+containers can be built up in layers
+
+* base layer typically some version of ubuntu
+* upper layers are progressively more app-specific
+
 apps can consist of multiple containers deployed in concert
 
 * docker compose ([plebnet-playground](https://github.com/PLEBNET-PLAYGROUND/plebnet-playground-docker), [Start-9](https://docs.start9.com/latest/developer-docs/packaging#package-the-service), [Umbrel](https://github.com/getumbrel/umbrel-apps#1-containerizing-the-app-using-docker))

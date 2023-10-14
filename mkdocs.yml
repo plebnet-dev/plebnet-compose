@@ -8,7 +8,7 @@ edit_uri: ""
 
 nav:
   - Home: index.md
-  - Intro: intro.md
+  - Motivation: motivation.md
   - Images: images.md
   - Build: build.md
   - Run: run.md
