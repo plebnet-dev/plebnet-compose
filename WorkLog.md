@@ -1,3 +1,6 @@
+
+# 2023-10-14 14:54:59.857191: clock-in
+
 # 2023-10-13 22:19:19.783865: clock-out: T-10m 
 
 * set up compose docs site
