@@ -1,0 +1,19 @@
+version: "3.9"
+
+services:
+  docs:
+    image: plebnet-compose
+    ports:
+      - "8000:8000"
+    build:
+      context: .
+      dockerfile: docs.Dockerfile
+    volumes:
+      - .:/code
+    container_name: rigly-backend-docs
+    command:
+      - mkdocs
+      - serve
+      - -a
+      - 0.0.0.0:8000
+
