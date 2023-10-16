@@ -1,9 +1,9 @@
 # Project information
-site_name: Plebnet Compose
+site_name: !ENV [SITE_NAME, "Plebnet Compose"]
 
 # Repository
 repo_name: plebnet-compose
-repo_url: https://github.com/plebnet-dev/plebnet-compose
+repo_url: https://github.com/plebnet-dev/plebnet-compose.git
 edit_uri: ""
 
 nav:

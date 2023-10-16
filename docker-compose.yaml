@@ -11,6 +11,8 @@ services:
     volumes:
       - .:/code
     container_name: rigly-backend-docs
+    environment:
+      SITE_NAME: Plebnet Compose (Oct 21 '03)
     command:
       - mkdocs
       - serve

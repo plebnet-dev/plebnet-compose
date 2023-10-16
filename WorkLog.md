@@ -1,3 +1,5 @@
+* config env variables, deployment
+* https://github.com/settings/personal-access-tokens/new
 
 # 2023-10-15 20:01:04.467552: clock-in
 
