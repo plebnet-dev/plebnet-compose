@@ -12,7 +12,7 @@ services:
       - .:/code
     container_name: rigly-backend-docs
     environment:
-      SITE_NAME: Plebnet Compose (Oct 21 '03)
+      SITE_NAME: ${SITE_NAME}
     command:
       - mkdocs
       - serve

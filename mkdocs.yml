@@ -13,7 +13,14 @@ nav:
   - Build: build.md
   - Run: run.md
   - Compose: compose.md
-  - Containers: containers.md
+  - Environment: environment.md
+  - Volumes: volumes.md
+  - Network: network.md
+  - WorkLog: worklog.md
+
+extra_watch_dirs:
+  - ..
+
 theme:
   name: material
   palette:

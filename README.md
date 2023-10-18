@@ -17,4 +17,8 @@ Install docker for desktop here https://docs.docker.com/engine/install/#desktop
 
 This will allow you to run `docker` and `docker compose` commands
 
+To run these docs:
 
+```sh
+docker compose up docs
+```

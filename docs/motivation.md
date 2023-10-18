@@ -25,8 +25,18 @@ containers can be built up in layers
 apps can consist of multiple containers deployed in concert
 
 * docker compose ([plebnet-playground](https://github.com/PLEBNET-PLAYGROUND/plebnet-playground-docker), [Start-9](https://docs.start9.com/latest/developer-docs/packaging#package-the-service), [Umbrel](https://github.com/getumbrel/umbrel-apps#1-containerizing-the-app-using-docker))
-* kubernetes (targets AWS, Google, etc)
 
+
+## deployment
+
+Many deployment technologies exist to host your applications on the web
+
+* Kubernetes (general, supported by AWS, Google, etc)
+* Amazon ECS (Elastic Container Service)
+* Google Kubernetes Engine (GKE)
+* Azure Kubernetes Service (AKS)
+* Kubernetes on DigitalOcean
+* Heroku
 
 ## security
 

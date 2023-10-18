@@ -27,4 +27,4 @@ plebnet-compose     v1        6b50b5681519   4 minutes ago   475MB
 ...
 ```
 
-This way of building is fine when there is only one image. We'll see in a moment how to do this with `compose`
+This way of building is suitable when there is only one image, but it quickly becomes cumbersome when dealing with multiple related images and services. We'll see in a moment how to handle this with `compose` [Compose](compose.html).
