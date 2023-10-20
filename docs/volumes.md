@@ -29,5 +29,20 @@ When the container starts, it uses `/code` as the working directory so that `mkd
 Named volumes are used to persist and share data between containers in a Docker Compose environment.
 A typical use case is when you have a database running in one service that another service needs to access.
 
-todo: example
+
+To show existing volumes:
+
+```sh
+docker volume ls
+...
+local     plebnet-compose_pgdata
+```
+
+To delete a volume, first bring down any containers that are currently using it
+
+```sh
+docker compose down
+docker volume rm plebnet-compose_pgdata
+```
+
 

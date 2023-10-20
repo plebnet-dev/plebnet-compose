@@ -19,3 +19,55 @@ services:
       - -a
       - 0.0.0.0:8000
 
+
+  app:
+    image: my-flask-app:latest
+    build:
+      context: app
+      dockerfile: app.Dockerfile
+    depends_on:
+      - local_db
+    environment:
+      - DB_HOST=local_db
+      - DB_PORT=${DB_PORT_LOCAL}
+      - DB_USER=${DB_USER_LOCAL}
+      - DB_PASS=${DB_PASS_LOCAL}
+      - DB_NAME=${DB_NAME_LOCAL}
+    volumes:
+      - ./app:/usr/src/app
+    depends_on:
+      - local_db
+    ports:
+      - "8050:8050"
+
+
+  local_db:
+    image: postgres
+    restart: always
+    volumes:
+      - pgdata:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: ${DB_USER_LOCAL}
+      POSTGRES_PASSWORD: ${DB_PASS_LOCAL}
+      POSTGRES_DB: ${DB_NAME_LOCAL}
+      TZ: ${TZ}
+      POSTGRES_HOST_AUTH_METHOD: trust
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "${DB_HOST_LOCAL}"]
+      interval: 5s
+      timeout: 1s
+      retries: 10
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${DB_USER_LOCAL} -d ${DB_NAME_LOCAL} -h ${DB_HOST_LOCAL} -p ${DB_PORT_LOCAL}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    hostname: ${DB_HOST_LOCAL}
+
+volumes:
+  pgdata:
+
