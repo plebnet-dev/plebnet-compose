@@ -4,9 +4,15 @@ import flask
 from werkzeug.middleware.proxy_fix import ProxyFix
 import os
 import pathlib
-from sql_commands import initialize_db
+from sql_commands import initialize_db, initialize_db_nodes
 
-initialize_db()  # This calls the initialize_db function from sql_commands.py
+
+
+# set up the database
+initialize_db()
+
+# create the node data
+initialize_db_nodes(5)
 
 
 this_dir = pathlib.Path(__file__).parent.resolve()

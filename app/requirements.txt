@@ -6,3 +6,4 @@ pandas
 SQLAlchemy
 dash-bootstrap-components
 git+https://github.com/predsci/psidash.git
+networkx

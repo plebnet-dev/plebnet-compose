@@ -2,15 +2,15 @@
 
 import os
 import plotly.graph_objs as go
-from dash.exceptions import PreventUpdate  # Import PreventUpdate
+from dash.exceptions import PreventUpdate
 from dash import callback_context, html
 import logging
 from datetime import datetime
 import hashlib
 
-from sql_commands import update_db, delete_db, setup_database, \
+from sql_commands import update_db, delete_db, \
     print_existing_tables, fetch_db_data, update_connections_value, \
-    NODES_QUERY
+    update_color_value, NODES_QUERY
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -45,17 +45,6 @@ def update_input_name(selected_name):
 
 
 
-def name_to_color(name):
-    """Generates a deterministic color for an input string using MD5 hash."""
-    # Encode the name to bytes, as required by hashlib.md5
-    name_bytes = name.encode('utf-8')
-    # Generate an MD5 hash from the name
-    hash_object = hashlib.md5(name_bytes)
-    # Get the first 6 characters of the hash's hexadecimal representation
-    color_code = hash_object.hexdigest()[:6]
-    return f'#{color_code}'
-
-
 def update_db_table(pathname, db_update_trigger):
     query = "SELECT * FROM nodes;"
     df = fetch_db_data(query).sort_values('connections', ascending=False)
@@ -69,28 +58,33 @@ def update_db_table(pathname, db_update_trigger):
 
 
 def get_db_graph():
-    """Generate and return a bar graph showing node connections from the DB."""
+    """Generate and return a bar graph showing node connections from the DB with a log scale on the y-axis."""
     try:
         query = "SELECT * FROM nodes;"
         # Fetch data from the database and sort it based on connections
         df = fetch_db_data(query).sort_values('connections', ascending=False)
-        
-        # Generate a color for each name
-        colors = [name_to_color(name) for name in df['name']]
-        # Create a bar graph using Plotly
+        try:
+            # Generate a color for each name
+            colors = df['color']
+        except:
+            logging.error(df.columns)
+            raise
+        # Create a bar graph using Plotly with a log scale on the y-axis
         fig = go.Figure(data=[go.Bar(x=df['name'], y=df['connections'], marker=dict(color=colors))])
 
-        # Update layout for dark theme
+        # Update layout for dark theme and set y-axis to log scale
         fig.update_layout(
+            uirevision=1,
             xaxis=dict(
                 title='node name',
                 title_font=dict(color='white'),  # Set x-axis title color to white
                 tickfont=dict(color='white'),  # Set x-axis tick labels color to white
             ),
             yaxis=dict(
-                title='number of connections',
+                title='number of connections (log scale)',  # Update y-axis title
                 title_font=dict(color='white'),  # Set y-axis title color to white
                 tickfont=dict(color='white'),  # Set y-axis tick labels color to white
+                type='log',  # Set y-axis scale to log
             ),
             plot_bgcolor='#2c2c2c',  # Set plot background color to #2c2c2c
             paper_bgcolor='#2c2c2c',  # Set paper background color to #2c2c2c
@@ -106,11 +100,12 @@ def get_db_graph():
         )
 
         return fig
+
     except Exception as e:
         logging.error(f"Database error: {e}")
         return dash.no_update
 
-def update_or_delete_entry(submit_n, delete_n, input_name, connections_value):
+def update_or_delete_entry(submit_n, delete_n, input_name, connections_value, color_value):
     """Update or delete an entry in the DB based on user interaction."""
     ctx = callback_context  # Get callback context to identify which button was pressed
 
@@ -121,7 +116,7 @@ def update_or_delete_entry(submit_n, delete_n, input_name, connections_value):
 
     # Update the database if submit button was pressed and necessary input is provided
     if button_id == 'submit-button' and input_name and connections_value is not None:
-        update_db(input_name, connections_value)
+        update_db(input_name, connections_value, color_value)
     # Delete from the database if delete button was pressed and input name is provided
     elif button_id == 'delete-button' and input_name:
         delete_db(input_name)

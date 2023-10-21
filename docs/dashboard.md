@@ -53,6 +53,8 @@ This way, changes to the database will persist whenever we restart the container
 
 ## Connecting to the database
 
+Docker compose's [DNS](network.md) allows the host name for the local database to automatically match the service name. This is super convenient because we don't need to keep track of ip addresses explicitly.
+
 ```yaml
   app:
     image: my-flask-app:latest
@@ -95,7 +97,7 @@ connecting to db at: postgresql://postgres_user:****@local_db:5432/postgres
 ```
 
 
-Because you are viewing this documentation from your host, we can embed the dashboard as an iframe referencing localhost:
+We can embed the dashboard as an iframe. Because we are accessing the app from the host, we need to use `localhost`:
 
 ```html
 <iframe src="http://localhost:8050" width="1400" height="1200"></iframe>

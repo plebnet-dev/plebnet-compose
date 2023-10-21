@@ -1,5 +1,5 @@
 
-Compose (formerly, docker-compose) is a Docker utility that allows you to `build` and `run` containers in a reproducible manner, based on a configuration file named `docker-compose.yml`.
+[Compose](https://docs.docker.com/compose/) is a Docker utility that allows you to `build` and `run` containers in a reproducible manner, based on a configuration file named `docker-compose.yml`.
 
 !!! note
     `docker-compose` (hyphenated) is a standalone python tool which is gradually being replaced by `docker compose`. You may see it in older tutorials, but it behaves similarly.

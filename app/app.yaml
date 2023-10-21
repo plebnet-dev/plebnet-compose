@@ -48,18 +48,12 @@ layout:
                 children:
                 - dbc.Col:
                     md: 2
-                    sm: 
-                      offset: 1
-                      size: 10
                     children:
                     - dbc.Select:
                         id: name-dropdown
                         size: sm
                 - dbc.Col:
                     md: 2
-                    sm: 
-                      offset: 1
-                      size: 10
                     children:
                     - dbc.Input:
                         id: name-input
@@ -67,9 +61,6 @@ layout:
                         placeholder: Enter new name
                 - dbc.Col:
                     md: 1
-                    sm: 
-                      offset: 1
-                      size: 10
                     children:
                     - dbc.Input:
                         id: connections-input
@@ -77,24 +68,26 @@ layout:
                         min: 0
                         placeholder: Enter value for connections
                 - dbc.Col:
+                    md: 1
+                    children:
+                    - dbc.Input:
+                        id: color-input
+                        type: color
+                        value: '#FFFFFF'  # Default color, optional
+                - dbc.Col:
                     md: 2
-                    sm: 
-                      offset: 1
-                      size: 2
                     children:
                     - dbc.Button:
                         id: submit-button
                         children: Submit
                 - dbc.Col:
                     md: 2
-                    sm: 
-                      offset: 5
-                      size: 2
                     children:
                     - dbc.Button:
                         id: delete-button
                         children: Delete
                         color: danger
+
     - html.Br:
     - dbc.Card:
         children:
@@ -128,8 +121,6 @@ layout:
     - dbc.Card:
         children:
         - html.Br:
-        - html.H3:
-            children: nodes table
         - dbc.Row:
             children:
             - dbc.Col:
@@ -180,6 +171,15 @@ callbacks:
         attr: value
     callback: callbacks.update_connections_value
 
+  update_color_value:
+    input:
+      - id: name-input
+        attr: value
+    output:
+      - id: color-input
+        attr: value
+    callback: callbacks.update_color_value
+
   update_or_delete_entry:
     input:
       - id: submit-button
@@ -190,6 +190,8 @@ callbacks:
       - id: name-input
         attr: value
       - id: connections-input
+        attr: value
+      - id: color-input
         attr: value
     output:
       - id: db-update-trigger
