@@ -1,3 +1,6 @@
+
+# 2023-10-21 16:34:21.663505: clock-in
+
 # 2023-10-21 15:12:54.889684: clock-out
 
 * dashboard working in docs
