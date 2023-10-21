@@ -16,6 +16,7 @@ nav:
   - Environment: environment.md
   - Volumes: volumes.md
   - Network: network.md
+  - Dashboard: dashboard.md
   - WorkLog: worklog.md
 
 extra_watch_dirs:
