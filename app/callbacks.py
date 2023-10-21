@@ -1,167 +1,145 @@
+# callbacks.py
+
 import os
-import dash
-from dash import dcc, html
-from dash.dependencies import Input, Output, State
 import plotly.graph_objs as go
-import pandas as pd
-from sqlalchemy import create_engine, text, MetaData
+from dash.exceptions import PreventUpdate  # Import PreventUpdate
+from dash import callback_context, html
 import logging
 from datetime import datetime
-from dash.exceptions import PreventUpdate  # Import PreventUpdate
+import hashlib
 
+from sql_commands import update_db, delete_db, setup_database, \
+    print_existing_tables, fetch_db_data, update_connections_value, \
+    NODES_QUERY
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-# Fetch environment variables
-DB_HOST = os.environ['DB_HOST']
-DB_PORT = os.environ['DB_PORT']
-DB_USER = os.environ['DB_USER']
-DB_PASS = os.environ['DB_PASS']
-DB_NAME = os.environ['DB_NAME']
-
-# create connection
-engine = create_engine(f'postgresql://{DB_USER}:{DB_PASS}@{DB_HOST}:{DB_PORT}/{DB_NAME}')
-
-def initialize_db():
-    with engine.connect() as conn:
-        conn.execute(text("""
-            CREATE TABLE IF NOT EXISTS nodes (
-                id SERIAL PRIMARY KEY,
-                name VARCHAR(255) UNIQUE,
-                connections INT
-            );
-        """))
-        conn.commit()
-        logging.info("Table nodes initialized.")
-
-initialize_db()
-
-def update_db(name, connections):
-    with engine.connect() as conn:
-        trans = conn.begin()  # Begin a transaction
-        try:
-            query = text(f"""
-                INSERT INTO nodes (name, connections)
-                VALUES
-                ('{name}', {connections})
-                ON CONFLICT (name) DO UPDATE SET connections = EXCLUDED.connections;
-            """)
-            conn.execute(query)
-            trans.commit()  # Commit the transaction
-        except Exception as e:
-            trans.rollback()  # Rollback the transaction in case of error
-            logging.error(f"Database error: {e}")
-
-def setup_database():
-    logging.info('inserting rows into database')
-    for name, connections in [
-        ('smash', 20),
-        ('hello', 30),
-        ('jessica', 2),
-        ('bitkarrot', 3),
-        ]:
-        update_db(name, connections)
-
-def name_to_color(name):
-    return f'#{hash(name) % 0xFFFFFF:06x}'
-
-
-def get_db_graph():
-    try:
-        query = "SELECT * FROM nodes;"
-        df = pd.read_sql_query(query, engine).sort_values('connections', ascending=False)
-        colors = [name_to_color(name) for name in df['name']]
-        fig = go.Figure(data=[go.Bar(x=df['name'], y=df['connections'], marker=dict(color=colors))])
-        return fig
-    except Exception as e:
-        logging.error(f"Database error: {e}")
-        return dash.no_update
-
-
-def delete_db(name):
-    with engine.connect() as conn:
-        trans = conn.begin()
-        try:
-            query = text(f"DELETE FROM nodes WHERE name = '{name}';")
-            conn.execute(query)
-            trans.commit()
-        except Exception as e:
-            trans.rollback()
-            logging.error(f"Database error: {e}")
-
-def print_existing_tables():
-    # Create a MetaData object and reflect the database
-    metadata = MetaData()
-    metadata.reflect(bind=engine)
-
-    # Get the table names
-    table_names = metadata.tables.keys()
-
-    logging.info(f"Existing tables: {len(table_names)}")
-    for table_name in table_names:
-        logging.info(f" {table_name}")
-
-        query = f"SELECT * FROM {table_name};"
-        df = pd.read_sql_query(query, engine)
-        logging.info(f'fetched {table_name}')
-        logging.info(df)
-
-
 def update_dropdown_options_value(pathname, db_update_trigger):
-    query = "SELECT name FROM nodes;"
-    df = pd.read_sql_query(query, engine)
+    """Update dropdown options and value based on DB data and update trigger."""
+    # Fetch data from the database using the predefined query
+    df = fetch_db_data(NODES_QUERY)  
     if df.empty:
-    	options = []
-    	value = 'hello'
+        options = []  # Set empty options if data is empty
+        value = 'hello'
+        return options, value
+
+    # Fetch options from db
+    names = list(df['name'])
+    options = [{'label': name, 'value': name} for name in names]  # Build options from names
+
+    # Update the value based on db update trigger
+    if db_update_trigger is not None:
+        trigger_name = db_update_trigger.split(',')[-1]
+        if trigger_name in names:
+            value = trigger_name
+        else:
+            value = names[0]
     else:
-    	options = [{'label': name, 'value': name} for name in df['name']]
-    	value = options[0]['value']
+        value = names[0]
     return options, value
 
-
 def update_input_name(selected_name):
+    """Return the selected name as is. This function acts as a passthrough."""
     return selected_name
 
 
 
-def update_connections_value(input_name):
-    if not input_name:
-        raise PreventUpdate  # Raise PreventUpdate if input_name is None or empty
+def name_to_color(name):
+    """Generates a deterministic color for an input string using MD5 hash."""
+    # Encode the name to bytes, as required by hashlib.md5
+    name_bytes = name.encode('utf-8')
+    # Generate an MD5 hash from the name
+    hash_object = hashlib.md5(name_bytes)
+    # Get the first 6 characters of the hash's hexadecimal representation
+    color_code = hash_object.hexdigest()[:6]
+    return f'#{color_code}'
 
-    query = text("SELECT connections FROM nodes WHERE name = :name")
-    with engine.connect() as conn:
-        result = conn.execute(query, {"name": input_name}).fetchone()
-    if result:
-        return result[0]
-    else:
-        raise PreventUpdate
+
+def update_db_table(pathname, db_update_trigger):
+    query = "SELECT * FROM nodes;"
+    df = fetch_db_data(query).sort_values('connections', ascending=False)
+    
+    if df.empty:
+        return []  # return an empty list if there's no data
+
+    # Convert DataFrame to a list of dictionaries for DataTable
+    data = df.to_dict('records')
+    return data
+
 
 def get_db_graph():
+    """Generate and return a bar graph showing node connections from the DB."""
     try:
         query = "SELECT * FROM nodes;"
-        df = pd.read_sql_query(query, engine).sort_values('connections', ascending=False)
+        # Fetch data from the database and sort it based on connections
+        df = fetch_db_data(query).sort_values('connections', ascending=False)
+        
+        # Generate a color for each name
         colors = [name_to_color(name) for name in df['name']]
+        # Create a bar graph using Plotly
         fig = go.Figure(data=[go.Bar(x=df['name'], y=df['connections'], marker=dict(color=colors))])
+
+        # Update layout for dark theme
+        fig.update_layout(
+            xaxis=dict(
+                title='node name',
+                title_font=dict(color='white'),  # Set x-axis title color to white
+                tickfont=dict(color='white'),  # Set x-axis tick labels color to white
+            ),
+            yaxis=dict(
+                title='number of connections',
+                title_font=dict(color='white'),  # Set y-axis title color to white
+                tickfont=dict(color='white'),  # Set y-axis tick labels color to white
+            ),
+            plot_bgcolor='#2c2c2c',  # Set plot background color to #2c2c2c
+            paper_bgcolor='#2c2c2c',  # Set paper background color to #2c2c2c
+            title=dict(
+                text='LN node connections',
+                font=dict(
+                    color='white'  # Set title color to white
+                )
+            ),
+            font=dict(
+                color='white'  # Set global font color to white
+            )
+        )
+
         return fig
     except Exception as e:
         logging.error(f"Database error: {e}")
         return dash.no_update
 
-def update_database(n_clicks, input_name, connections_value):
-    if n_clicks is None:
+def update_or_delete_entry(submit_n, delete_n, input_name, connections_value):
+    """Update or delete an entry in the DB based on user interaction."""
+    ctx = callback_context  # Get callback context to identify which button was pressed
+
+    if not ctx.triggered:
         raise PreventUpdate  # Prevent update on initial load
 
-    if not input_name or connections_value is None:
+    button_id = ctx.triggered[0]['prop_id'].split('.')[0]  # Extract button ID from the context
+
+    # Update the database if submit button was pressed and necessary input is provided
+    if button_id == 'submit-button' and input_name and connections_value is not None:
+        update_db(input_name, connections_value)
+    # Delete from the database if delete button was pressed and input name is provided
+    elif button_id == 'delete-button' and input_name:
+        delete_db(input_name)
+    else:
         return  # Optionally, add some error handling here
 
-    update_db(input_name, connections_value)
-
-    # Return a unique value to trigger the graph change
-    return str(datetime.utcnow())
+    # Return the current UTC timestamp as a string
+    # this gets stored in a hidden div
+    # input_name will be parsed to set the value of the dropdown
+    return str(datetime.utcnow()) + ',' + input_name
 
 def update_graph(pathname, db_update_trigger):
-    if pathname is None and db_update_trigger is None:
-        raise PreventUpdate  # Prevent update on initial load without a db update
+    """Update the graph based on the pathname and db update trigger."""
+    ctx = callback_context  # Get the callback context to check the triggered inputs
 
-    return get_db_graph()
+    # Prevent update on initial load or if db_update_trigger is None
+    if not ctx.triggered and db_update_trigger is None:
+        raise PreventUpdate
+
+    return get_db_graph()  # Return the updated graph
+

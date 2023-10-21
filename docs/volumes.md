@@ -45,4 +45,4 @@ docker compose down
 docker volume rm plebnet-compose_pgdata
 ```
 
-
+We'll see how we utilize volumes when running an [example Dashboard application](dashboard.md)
