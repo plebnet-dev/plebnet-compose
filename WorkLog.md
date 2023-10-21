@@ -1,3 +1,6 @@
+
+# 2023-10-21 10:56:43.961796: clock-in
+
 # 2023-10-21 10:21:19.595816: clock-out
 
 * refactor to psidash
