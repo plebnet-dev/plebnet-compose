@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="build.html">
+        <link rel="prev" href="environment.html">
       
       
-        <link rel="next" href="compose.html">
+        <link rel="next" href="network.html">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Run - Plebnet Compose</title>
+        <title>Volumes - Plebnet Compose</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-the-container-the-hard-way" class="md-skip">
+        <a href="#volumes" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Run
+              Volumes
             
           </span>
         </div>
@@ -314,27 +314,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Run
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="run.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="run.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -343,44 +325,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-container-the-hard-way" class="md-nav__link">
-    running the container (the hard way)
-  </a>
-  
-    <nav class="md-nav" aria-label="running the container (the hard way)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stopping-the-container" class="md-nav__link">
-    stopping the container
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -427,9 +371,27 @@
       
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="volumes.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Volumes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="volumes.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -438,6 +400,45 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#volumes" class="md-nav__link">
+    Volumes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#volume-mounts" class="md-nav__link">
+    Volume Mounts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-volumes" class="md-nav__link">
+    Named Volumes
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -524,22 +525,23 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-the-hard-way" class="md-nav__link">
-    running the container (the hard way)
-  </a>
-  
-    <nav class="md-nav" aria-label="running the container (the hard way)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stopping-the-container" class="md-nav__link">
-    stopping the container
+  <a href="#volumes" class="md-nav__link">
+    Volumes
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#volume-mounts" class="md-nav__link">
+    Volume Mounts
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#named-volumes" class="md-nav__link">
+    Named Volumes
+  </a>
   
 </li>
       
@@ -558,43 +560,38 @@
                   
 
 
-  <h1>Run</h1>
+  <h1>Volumes</h1>
 
-<h2 id="running-the-container-the-hard-way">running the container (the hard way)<a class="headerlink" href="#running-the-container-the-hard-way" title="Permanent link">#</a></h2>
-<p><code>docker run</code></p>
+<h2 id="volumes">Volumes<a class="headerlink" href="#volumes" title="Permanent link">#</a></h2>
+<p>Docker volumes are used to persist data from the host to the container.
+Volumes are necessary when</p>
 <ul>
-<li>This is the basic command used to create and start a container from a specified Docker image.</li>
+<li>Host files need to be passed into and modified by the container</li>
+<li>Databases need to persist accross multiple runs of the same container</li>
+<li>In development mode, when code needs to be modified on the host (to avoid rebuilding constantly)</li>
 </ul>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="nv">$PWD</span>:/code<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>--name<span class="w"> </span>plebnet-container<span class="w"> </span>plebnet-compose
+<h2 id="volume-mounts">Volume Mounts<a class="headerlink" href="#volume-mounts" title="Permanent link">#</a></h2>
+<p>"Volume Mounts" are used to mount directories from the host into the container.</p>
+<p>For instance, our documentation image doesn't actually contain this project's code until run time.
+This is accomplished by the following line in our <code>docker-compose.yml</code></p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="nt">volumes</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">.:/code</span>
 </span></code></pre></div>
-<p><code>--rm</code></p>
-<ul>
-<li>This option tells Docker to automatically remove the container when it exits, which helps to keep your system clean by removing containers you no longer need.</li>
-</ul>
-<p><code>-v $PWD:/code</code></p>
-<ul>
-<li>The <code>-v</code> option is used to create a volume, which allows you to share files between your host system and the container.</li>
-<li><code>$PWD</code> is an environment variable that holds the current working directory on your host system.</li>
-<li><code>:/code</code> specifies the path inside the container where the host system's current working directory will be mounted.</li>
-</ul>
-<p>So, <code>-v $PWD:/code</code> maps the current working directory on your host system to /code inside the container, allowing files to be shared between the two.</p>
-<p><code>-p 8000:8000:</code></p>
-<ul>
-<li>The <code>-p</code> option is used to map a port on your host system to a port on the container.</li>
-<li><code>8000:8000</code> maps port <code>8000</code> on your host system to port <code>8000</code> on the container, allowing network traffic to be forwarded between them.</li>
-</ul>
-<p><code>--name plebnet-container</code></p>
-<ul>
-<li>The <code>--name</code> option allows you to specify a name for the container, making it easier to identify and manage.
-plebnet-container is the name you've chosen for this container.</li>
-</ul>
-<p><code>plebnet-compose</code></p>
-<p>This is the name of the Docker image from which you want to create the container.
-The docker run command will create a new container from the plebnet-compose image, using the options specified.</p>
-<p>Together, this command will create and start a new container named plebnet-container from the plebnet-compose image, with the current working directory on your host system mounted to /code inside the container, and port 8000 on your host system mapped to port 8000 on the container. The container will be automatically removed when it exits due to the --rm option.</p>
-<h3 id="stopping-the-container">stopping the container<a class="headerlink" href="#stopping-the-container" title="Permanent link">#</a></h3>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>plebnet-container
+<p>This means mount <code>.</code> (the current working directory) into the container's <code>/code</code> directory.
+When the container starts, it uses <code>/code</code> as the working directory so that <code>mkdocs</code> will automatically refresh any changes to the documentation. You can test this by modifying this file on your host system.</p>
+<h2 id="named-volumes">Named Volumes<a class="headerlink" href="#named-volumes" title="Permanent link">#</a></h2>
+<p>Named volumes are used to persist and share data between containers in a Docker Compose environment.
+A typical use case is when you have a database running in one service that another service needs to access.</p>
+<p>To show existing volumes:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>volume<span class="w"> </span>ls
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>...
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">local</span><span class="w">     </span>plebnet-compose_pgdata
 </span></code></pre></div>
+<p>To delete a volume, first bring down any containers that are currently using it</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>down
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>docker<span class="w"> </span>volume<span class="w"> </span>rm<span class="w"> </span>plebnet-compose_pgdata
+</span></code></pre></div>
+<p>We'll see how we utilize volumes when running an <a href="dashboard.html">example Dashboard application</a></p>
 
 
 

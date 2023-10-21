@@ -9,10 +9,10 @@
       
       
       
-        <link rel="prev" href="build.html">
+        <link rel="prev" href="compose.html">
       
       
-        <link rel="next" href="compose.html">
+        <link rel="next" href="volumes.html">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -20,7 +20,7 @@
     
     
       
-        <title>Run - Plebnet Compose</title>
+        <title>Environment - Plebnet Compose</title>
       
     
     
@@ -75,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#running-the-container-the-hard-way" class="md-skip">
+        <a href="#env" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Run
+              Environment
             
           </span>
         </div>
@@ -314,27 +314,9 @@
       
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    Run
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="run.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="run.html" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -343,44 +325,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#running-the-container-the-hard-way" class="md-nav__link">
-    running the container (the hard way)
-  </a>
-  
-    <nav class="md-nav" aria-label="running the container (the hard way)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stopping-the-container" class="md-nav__link">
-    stopping the container
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -408,9 +352,27 @@
       
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="environment.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Environment
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="environment.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -419,6 +381,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#env" class="md-nav__link">
+    .env
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container" class="md-nav__link">
+    container
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    application
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -524,22 +532,30 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#running-the-container-the-hard-way" class="md-nav__link">
-    running the container (the hard way)
-  </a>
-  
-    <nav class="md-nav" aria-label="running the container (the hard way)">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#stopping-the-container" class="md-nav__link">
-    stopping the container
+  <a href="#env" class="md-nav__link">
+    .env
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#docker-composeyml" class="md-nav__link">
+    docker-compose.yml
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#container" class="md-nav__link">
+    container
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    application
+  </a>
   
 </li>
       
@@ -558,43 +574,57 @@
                   
 
 
-  <h1>Run</h1>
+  <h1>Environment</h1>
 
-<h2 id="running-the-container-the-hard-way">running the container (the hard way)<a class="headerlink" href="#running-the-container-the-hard-way" title="Permanent link">#</a></h2>
-<p><code>docker run</code></p>
-<ul>
-<li>This is the basic command used to create and start a container from a specified Docker image.</li>
-</ul>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-v<span class="w"> </span><span class="nv">$PWD</span>:/code<span class="w"> </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span>--name<span class="w"> </span>plebnet-container<span class="w"> </span>plebnet-compose
+<p>Environment variables are used to pass information into the container at run time.</p>
+<p>This allows you to build an image once but run it with different configurations (API Keys, passwords, etc) or for different environments (development vs production).</p>
+<p>Typically, environment variables flow like this:</p>
+<p><code>.env</code> --&gt; <code>docker-compose.yml</code> --&gt; <code>container</code> --&gt; <code>application</code></p>
+<h2 id="env">.env<a class="headerlink" href="#env" title="Permanent link">#</a></h2>
+<p>Environment variables are typically placed in a <code>.env</code> file at the base of the repo. Docker automatically looks for <code>.env</code> when running the compose configuration. Here are the contents of this project's <code>.env</code>:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">#mkdocs</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">SITE_NAME</span><span class="o">=</span><span class="s2">&quot;Plebnet Compose (Oct 21, 2023)&quot;</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1">#local db</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nv">DB_HOST_LOCAL</span><span class="o">=</span>db_local
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">DB_HOST_LOCAL_PROD</span><span class="o">=</span>db_local_prod
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="nv">DB_USER_LOCAL</span><span class="o">=</span>postgres_user
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="nv">DB_PASS_LOCAL</span><span class="o">=</span>mypass
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="nv">DB_PORT_LOCAL</span><span class="o">=</span><span class="m">5432</span>
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nv">DB_NAME_LOCAL</span><span class="o">=</span>postgres
 </span></code></pre></div>
-<p><code>--rm</code></p>
-<ul>
-<li>This option tells Docker to automatically remove the container when it exits, which helps to keep your system clean by removing containers you no longer need.</li>
-</ul>
-<p><code>-v $PWD:/code</code></p>
-<ul>
-<li>The <code>-v</code> option is used to create a volume, which allows you to share files between your host system and the container.</li>
-<li><code>$PWD</code> is an environment variable that holds the current working directory on your host system.</li>
-<li><code>:/code</code> specifies the path inside the container where the host system's current working directory will be mounted.</li>
-</ul>
-<p>So, <code>-v $PWD:/code</code> maps the current working directory on your host system to /code inside the container, allowing files to be shared between the two.</p>
-<p><code>-p 8000:8000:</code></p>
-<ul>
-<li>The <code>-p</code> option is used to map a port on your host system to a port on the container.</li>
-<li><code>8000:8000</code> maps port <code>8000</code> on your host system to port <code>8000</code> on the container, allowing network traffic to be forwarded between them.</li>
-</ul>
-<p><code>--name plebnet-container</code></p>
-<ul>
-<li>The <code>--name</code> option allows you to specify a name for the container, making it easier to identify and manage.
-plebnet-container is the name you've chosen for this container.</li>
-</ul>
-<p><code>plebnet-compose</code></p>
-<p>This is the name of the Docker image from which you want to create the container.
-The docker run command will create a new container from the plebnet-compose image, using the options specified.</p>
-<p>Together, this command will create and start a new container named plebnet-container from the plebnet-compose image, with the current working directory on your host system mounted to /code inside the container, and port 8000 on your host system mapped to port 8000 on the container. The container will be automatically removed when it exits due to the --rm option.</p>
-<h3 id="stopping-the-container">stopping the container<a class="headerlink" href="#stopping-the-container" title="Permanent link">#</a></h3>
-<div class="language-sh highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker<span class="w"> </span>stop<span class="w"> </span>plebnet-container
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><code>.env</code> contains sensitive information, you should <strong>NEVER add a .env file to git control.</strong> <code>.env</code> files are often included in <code>.gitignore</code> to prevent accidental upload.</p>
+</div>
+<h2 id="docker-composeyml">docker-compose.yml<a class="headerlink" href="#docker-composeyml" title="Permanent link">#</a></h2>
+<p>You can pass environment variables to your services using curly braces <code>${MY_ENV_VAR}</code>, like this:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># docker-compose.yml</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">...</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="l l-Scalar l-Scalar-Plain">environment</span><span class="p p-Indicator">:</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">      </span><span class="nt">SITE_NAME</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${SITE_NAME}</span>
 </span></code></pre></div>
+<h2 id="container">container<a class="headerlink" href="#container" title="Permanent link">#</a></h2>
+<p>Once provisioned by the compose file, the container's environment variables have been set. You can log in and verify these values for the <code>docs</code> service:</p>
+<div class="language-sh highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker<span class="w"> </span>compose<span class="w"> </span>run<span class="w"> </span>docs<span class="w"> </span>bash
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>root@4abd4921d273:/code#<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$SITE_NAME</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Plebnet<span class="w"> </span>Compose<span class="w"> </span><span class="o">(</span>Oct<span class="w"> </span><span class="m">21</span><span class="w"> </span><span class="err">&#39;</span><span class="m">03</span><span class="o">)</span>
+</span></code></pre></div>
+<h2 id="application">application<a class="headerlink" href="#application" title="Permanent link">#</a></h2>
+<p>Your application can (finally) access these values. How this is done depends on the language your app is written in. For example, in python it would be</p>
+<div class="language-py highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">import</span> <span class="nn">os</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="p">[</span><span class="s1">&#39;SITE_NAME&#39;</span><span class="p">])</span>
+</span></code></pre></div>
+<p>For this project, <code>SITE_NAME</code> is picked up by this secion of <code>mkdocs.yml</code> (in the base of this repo):</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Project information</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nt">site_name</span><span class="p">:</span><span class="w"> </span><span class="kt">!ENV</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">SITE_NAME</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&quot;Plebnet</span><span class="nv"> </span><span class="s">Compose&quot;</span><span class="p p-Indicator">]</span><span class="w"> </span><span class="c1"># if SITE_NAME is undefined, use Plebnet Compose</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Your app needs to handle cases where an environment variable is missing</p>
+</div>
 
 
 

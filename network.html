@@ -9,8 +9,10 @@
       
       
       
-        <link rel="prev" href="compose.html">
+        <link rel="prev" href="volumes.html">
       
+      
+        <link rel="next" href="dashboard.html">
       
       
       <link rel="icon" href="assets/images/favicon.png">
@@ -18,7 +20,7 @@
     
     
       
-        <title>Containers - Plebnet Compose</title>
+        <title>Network - Plebnet Compose</title>
       
     
     
@@ -73,7 +75,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#runtime" class="md-skip">
+        <a href="#ports" class="md-skip">
           Skip to content
         </a>
       
@@ -109,7 +111,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Containers
+              Network
             
           </span>
         </div>
@@ -350,6 +352,44 @@
       
   
   
+  
+    <li class="md-nav__item">
+      <a href="environment.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Environment
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="volumes.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Volumes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -363,18 +403,18 @@
           
   
   <span class="md-ellipsis">
-    Containers
+    Network
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="containers.html" class="md-nav__link md-nav__link--active">
+      <a href="network.html" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Containers
+    Network
   </span>
   
 
@@ -394,8 +434,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#runtime" class="md-nav__link">
-    Runtime
+  <a href="#ports" class="md-nav__link">
+    Ports
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-resolution" class="md-nav__link">
+    DNS resolution
   </a>
   
 </li>
@@ -404,6 +451,44 @@
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="dashboard.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dashboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="worklog.html" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WorkLog
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -433,8 +518,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#runtime" class="md-nav__link">
-    Runtime
+  <a href="#ports" class="md-nav__link">
+    Ports
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dns-resolution" class="md-nav__link">
+    DNS resolution
   </a>
   
 </li>
@@ -454,15 +546,17 @@
                   
 
 
-  <h1>Containers</h1>
+  <h1>Network</h1>
 
-<h2 id="runtime">Runtime<a class="headerlink" href="#runtime" title="Permanent link">#</a></h2>
-<p>The runtime environment likely differs from tha</p>
-<p>Environment variables are used to pass information into the container at run time. This is useful for</p>
-<ul>
-<li>config operations (development vs prodcu)</li>
-<li>private data (API Keys, passwords, etc)</li>
-</ul>
+<p>When you run a compose stack, docker sets up mini-network so the containers can communicate with to each other using web protocols.</p>
+<h2 id="ports">Ports<a class="headerlink" href="#ports" title="Permanent link">#</a></h2>
+<p>Services may include a <code>ports</code> section that maps a container's port to the host machine so it may be accessed over localhost</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="w">    </span><span class="nt">ports</span><span class="p">:</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&quot;8000:8000&quot;</span>
+</span></code></pre></div>
+<h2 id="dns-resolution">DNS resolution<a class="headerlink" href="#dns-resolution" title="Permanent link">#</a></h2>
+<p>Services may contact each other using their host name, which automatically resolves to the container's ip address.</p>
+<p>See the <a href="dashboard.html#connecting-to-the-database">Dashboard Example</a> to see how this is utilized to connect to a local database.</p>
 
 
 
