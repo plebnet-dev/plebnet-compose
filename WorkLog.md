@@ -1,3 +1,4 @@
+* removed healthcheck, duplicate depends
 # 2023-10-21 18:40:32.111283: clock-out
 
 * loaded lnd graph data
